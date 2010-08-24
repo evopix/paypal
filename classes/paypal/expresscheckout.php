@@ -23,16 +23,7 @@ class PayPal_ExpressCheckout extends PayPal {
 	 */
 	public function set(array $params = NULL)
 	{
-		if ($params === NULL)
-		{
-			// Use the default parameters
-			$params = $this->_default;
-		}
-		else
-		{
-			// Add the default parameters
-			$params += $this->_default;
-		}
+		$params = $this->_params($params);
 
 		if ( ! isset($params['AMT']))
 		{
