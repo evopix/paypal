@@ -163,6 +163,11 @@ abstract class PayPal {
 		return $data;
 	}
 
+	/**
+	 * Returns the sub-domain for the current environment.
+	 *
+	 * @return  string
+	 */
 	protected function _sub_domain()
 	{
 		if ($this->_environment === 'live')
