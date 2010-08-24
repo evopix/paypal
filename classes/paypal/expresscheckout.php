@@ -34,4 +34,19 @@ class PayPal_ExpressCheckout extends PayPal {
 		return $this->_post('SetExpressCheckout', $params);
 	}
 
+	/**
+	 * Returns the Express Checkout URL for the current environment.
+	 *
+	 * @return  string
+	 */
+	public function express_checkout_url($token = NULL)
+	{
+		if ($token !== NULL)
+		{
+			$token = '&token='.$token;
+		}
+
+		return 'https://www.'.$this->_sub_domain().'paypal.com/webscr&cmd=_express-checkout'.$token;
+	}
+
 } // End PayPal_ExpressCheckout
