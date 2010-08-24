@@ -81,18 +81,7 @@ abstract class PayPal {
 	 */
 	public function api_url()
 	{
-		if ($this->_environment === 'live')
-		{
-			// Live environment does not use a sub-domain
-			$env = '';
-		}
-		else
-		{
-			// Use the environment sub-domain
-			$env = $this->_environment.'.';
-		}
-
-		return 'https://api-3t.'.$env.'paypal.com/nvp';
+		return 'https://api-3t.'.$this->_sub_domain().'paypal.com/nvp';
 	}
 
 	/**
@@ -106,21 +95,10 @@ abstract class PayPal {
 	 */
 	public function redirect_url($command, array $params)
 	{
-		if ($this->_environment === 'live')
-		{
-			// Live environment does not use a sub-domain
-			$env = '';
-		}
-		else
-		{
-			// Use the environment sub-domain
-			$env = $this->_environment.'.';
-		}
-
 		// Add the command to the parameters
 		$params = array('cmd' => '_'.$command) + $params;
 
-		return 'https://www.'.$env.'paypal.com/webscr?'.http_build_query($params, NULL, '&');
+		return 'https://www.'.$this->_sub_domain().'paypal.com/webscr?'.http_build_query($params, NULL, '&');
 	}
 
 	/**
@@ -183,6 +161,22 @@ abstract class PayPal {
 		}
 
 		return $data;
+	}
+
+	protected function _sub_domain()
+	{
+		if ($this->_environment === 'live')
+		{
+			// Live environment does not use a sub-domain
+			$env = '';
+		}
+		else
+		{
+			// Use the environment sub-domain
+			$env = $this->_environment.'.';
+		}
+
+		return $env;
 	}
 
 } // End PayPal
