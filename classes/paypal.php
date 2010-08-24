@@ -179,4 +179,26 @@ abstract class PayPal {
 		return $env;
 	}
 
+	/**
+	 * Merges default params with supplied params.
+	 *
+	 * @param  array   POST parameters
+	 * @return  array
+	 */
+	protected function _params(array $params = NULL)
+	{
+		if ($params === NULL)
+		{
+			// Use the default parameters
+			$params = $this->_default;
+		}
+		else
+		{
+			// Add the default parameters
+			$params += $this->_default;
+		}
+
+		return $params;
+	}
+
 } // End PayPal
