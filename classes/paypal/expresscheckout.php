@@ -55,6 +55,26 @@ class PayPal_ExpressCheckout extends PayPal {
 	}
 
 	/**
+	 * Make an DoExpressCheckoutPayment call.
+	 *
+	 * @see      https://cms.paypal.com/us/cgi-bin/?&cmd=_render-content&content_ID=developer/e_howto_api_nvp_r_DoExpressCheckoutPayment
+	 * @throws  Kohana_Exception
+	 * @param   array   NVP parameters
+	 */
+	public function do_payment(array $params = NULL)
+	{
+		$params = $this->_params($params);
+
+		if ( ! isset($params['TOKEN']))
+		{
+			throw new Kohana_Exception('You must provide a :param parameter for :method',
+				array(':param' => 'TOKEN', ':method' => __METHOD__));
+		}
+
+		return $this->_post('DoExpressCheckoutPayment', $params);
+	}
+
+	/**
 	 * Returns the Express Checkout URL for the current environment.
 	 *
 	 * @return  string
