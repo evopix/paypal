@@ -1,3 +1,7 @@
+# NO LONGER UNDER ACTIVE DEVELOPMENT
+
+See https://github.com/Hete/kohana-paypal for a more up-to-date library.
+
 # About
 
 PayPal module for [Kohana v3.0.x](http://github.com/kohana/kohana)
